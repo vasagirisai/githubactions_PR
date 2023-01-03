@@ -1,0 +1,3 @@
+echo "checking the PR"
+test
+test2
