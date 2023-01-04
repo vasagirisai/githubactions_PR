@@ -6,7 +6,7 @@ jobs:
   create_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Create Pull Request
         id: create_pr
         uses: peter-evans/create-pull-request@v4
@@ -19,6 +19,6 @@ jobs:
           base: master
       - name: Get user input
         id: user_input
-        uses: actions/input@v4
+        uses: actions/input@v3
         with:
           message: 'Please enter a description of your changes:'
