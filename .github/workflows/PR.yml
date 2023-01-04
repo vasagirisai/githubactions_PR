@@ -1,35 +1,24 @@
-name: Create PR
+name: Create Pull Request
 
-on: push
+on: [push]
 
 jobs:
-  create_pr:
+  create_pull_request:
     runs-on: ubuntu-latest
     steps:
-      # Check out the repository
       - uses: actions/checkout@v2
-      # Prompt the user for the PR title and body
-      - name: Get PR details
-        id: pr_details
-        uses: actions/input@v2
-        with:
-          # Define the input fields
-          inputs:
-            - name: title
-              description: 'Enter the PR title'
-              required: true
-            - name: body
-              description: 'Enter the PR body'
-              required: false
-      # Create the PR
-      - name: Create PR
+      - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v2
         with:
-          # Use the input values as the PR title and body
-          title: ${{ steps.pr_details.outputs.title }}
-          body: ${{ steps.pr_details.outputs.body }}
-          # Set the target branch for the PR
-          head: ${{ github.ref }}
+          title: "My Pull Request"
+          body: |
+            Please enter a brief description of your changes:
+            ${{ steps.user_input.outputs.text }}
+          head: ${{ github.head_ref }}
           base: master
-          # Add a label to the PR
-          labels: 'Needs review'
+      - name: Get user input
+        id: user_input
+        uses: actions/input@v2
+        with:
+          message: 'Please enter a description of your changes:'
