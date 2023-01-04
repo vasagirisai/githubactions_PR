@@ -1,20 +1,20 @@
-name: Create PR
-
+name: Create production promotion pull request
 on:
   push:
     branches:
       - vasagirisai-pr-1
-
 jobs:
-  create-pr:
+  productionPromotion:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        title: 'This is the PR title'
-        body: 'This is the PR body'
-        head: vasagirisai-pr-1
-        base: main
+      - uses: actions/checkout@v3
+        with:
+          ref: production
+      - name: Reset promotion branch
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: vasagirisai-pr-1
