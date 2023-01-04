@@ -1,20 +1,17 @@
-name: Create production promotion pull request
+name: CI
 on:
   push:
-    branches:
-      - vasagirisai-pr-1
+    branches: [vasagirisai-pr-1]
+  pull_request:
+    branches: [vasagirisai-pr-1]
 jobs:
-  productionPromotion:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          ref: production
-      - name: Reset promotion branch
-        run: |
-          git fetch origin main:main
-          git reset --hard main
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          branch: vasagirisai-pr-1
+          node-version: 16.x
+      - run: npm ci
+      - run: npm run test
+      - run: npm run build
