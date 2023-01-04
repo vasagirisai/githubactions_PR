@@ -1,24 +1,20 @@
-name: Create Pull Request
+name: Create PR
 
-on: [push]
+on:
+  push:
+    branches:
+      - vasagirisai-pr-1
 
 jobs:
-  create_pull_request:
+  create-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Create Pull Request
-        id: create_pr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          title: "My Pull Request"
-          body: |
-            Please enter a brief description of your changes:
-            ${{ steps.user_input.outputs.text }}
-          head: ${{ github.head_ref }}
-          base: master
-      - name: Get user input
-        id: user_input
-        uses: actions/input@v3
-        with:
-          message: 'Please enter a description of your changes:'
+    - uses: actions/checkout@v2
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: 'This is the PR title'
+        body: 'This is the PR body'
+        head: main
+        base: main
