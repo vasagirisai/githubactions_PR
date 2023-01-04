@@ -1,14 +1,19 @@
-name: CI
+name: Pull Request Action
 on:
   push:
-    branches: [vasagirisai-pr-1]
-  pull_request:
-    branches: [vasagirisai-pr-1]
+    branches:
+      - vasagirisai-pr-1
+
 jobs:
-  build:
+  create-pull-request:
     runs-on: ubuntu-latest
     steps:
-    - name: create pull request
-      run: gh pr create -B main -H vasagirisai-pr-1 --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "feature, automated pr"
+          pr_title: "[Example] Simple demo"
