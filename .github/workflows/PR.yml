@@ -14,7 +14,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: 'This is testing PR'
-        body: 'This is testing PR body'
+        title: 'This is the PR title'
+        body: 'This is the PR body'
         head: vasagirisai-pr-1
         base: main
