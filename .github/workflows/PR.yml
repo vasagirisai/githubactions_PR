@@ -1,23 +1,34 @@
-name: Pull Request Action
+name: Demo to create automatic PR
+
 on:
   push:
     branches:
-      - vasagirisai-pr-1
+      - vasagiri-pr-1
 
 jobs:
-  create-pull-request:
+  updateAuthor:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: checking out code
         uses: actions/checkout@v2
-      - name: Create Pull Request
+
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1.x
+
+      - name: Update author information
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+
+      - name: Raise PR 1
+        id: demo-1
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: 'Updates to main branch'
-          title: 'Update to main branch'
-          body: 'This pull request updates the main branch with the latest changes.'
-          labels: 'update, main'
-          reviewers: 'vasagirisai'
-          assignees: 'vsagirisai'
-          branch: 'main'
+          branch: "vasagiri-pr-1"
+          base: main
+          title: "demo for auto pr1"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body:
+            This is to show automatic PR creation
+          reviewer: vasagirisai
           token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
