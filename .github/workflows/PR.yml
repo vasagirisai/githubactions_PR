@@ -30,3 +30,4 @@ jobs:
           body:
             This is to show automatic PR creation
           token: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: vasagirisai
