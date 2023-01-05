@@ -3,7 +3,7 @@ name: Demo to create automatic PR
 on:
   push:
     branches:
-      - vasagiri-pr-1
+      - vasagirisai-pr-1
 
 jobs:
   updateAuthor:
@@ -23,7 +23,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           branch: "main"
-          base: vasagiri-pr-1
+          base: vasagirisai-pr-1
           title: "demo for auto pr1"
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
