@@ -13,4 +13,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_PREFIX: auto-pr-branch1
           PULL_REQUEST_BRANCH: "main"
-          REVIEWERS: vasagirisai
+          PULL_REQUEST_REVIEWERS: vasagirisai
