@@ -4,7 +4,7 @@ on:
     branches: auto-pr-branch1
 jobs:
   auto-pull-request:
-    name: PullRequestAction
+    name: PullRequest-lint
     runs-on: ubuntu-latest
     steps:
       - name: pull-request-action
